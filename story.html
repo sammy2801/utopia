@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Story Begins</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <p>
+      give {{name}} a moment to breathe. they’re standing just outside the museum gates. it’s quiet, for now.
+    </p>
+
+    <p>
+      there’s two things you could do here. if you want to know a little bit about the world before we go in, here’s a 
+      <a href="history.html">history of Utopia</a>.
+    </p>
+
+    <p>
+      if you don’t care about all that, and want to jump right in, click on 
+      <a href="scene1.html">scene 1</a>.
+    </p>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("mainCharacterName") || "the main character";
+    document.body.innerHTML = document.body.innerHTML.replaceAll("{{name}}", name);
+  </script>
+</body>
+</html>

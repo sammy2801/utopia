@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Scene 4: The Canister Breaks</h2>
+
+    <p>
+      suddenly, the lights go off. there’s a crackling sound, and a flash above them. sparks fall from the ceiling, and there’s the sound of glass shattering. red emergency lights activate. there’s some panic, and exclaiming voices. the confusion compounds. a tall woman is the first to react, moving swiftly to the entrance door. it won’t budge.
+    </p>
+
+    <p>
+      Utopia’s voice glares from the speakers: “Unauthorised access detected. Security recalibrating. The process will take approximately five minutes. Please remain where you are.”
+    </p>
+
+    <p>
+      murmuring voices are heard. “Has Utopia been hacked?” someone says louder than the murmurs. {{name}} looks around for {{friend}}. they can’t see them where they were. they turn around. {{friend}} is at the canister. they’ve climbed the platform where the display was kept, and they’re holding it in their hand. the protective glass covering lies shattered. whatever sparked above them, fell right on top of the main display.
+    </p>
+
+    <p>
+      “{{friend}}! stop!” {{name}} screams, and walks towards them. they didn’t have a chance to read the description — they don’t know that that’s a dangerous object.
+    </p>
+
+    <p>
+      but it’s too late. {{friend}} has opened the canister. it’s roughly the size of a cucumber, and its top unscrews. something slithers out. {{friend}} drops it, in fright, and the contents spill out. it’s an icky, gooey black liquid, and it splatters out onto the floor. the smell {{name}} experienced earlier, now overpowers everyone in the room. it makes everyone’s eyes water. {{name}} feels themselves go numb, the pungent odour rushing into their head. it smells like camphor, like burning oil, like blood.
+    </p>
+
+    <p>
+      how do they know what blood smells like? that’s when they remember.
+    </p>
+
+    <hr>
+
+    <form id="scene4-form">
+      <h3>Question 1</h3>
+      <p>
+        {{name}} remembers something important from their childhood. what do you think they're remembering? it could be from when they were hurt as a child, or something else entirely. think about an object tied to that memory — like a kitchen knife, a pair of scissors, a shard of glass. you can describe it simply, or in more detail.
+      </p>
+
+      <textarea id="personalMemory" rows="5" placeholder="describe the memory here..."></textarea><br><br>
+
+      <h3>Question 2</h3>
+      <p>
+        the memory stirs something deeper — something that’s been erased from the collective conscience. something that Utopia doesn’t want people to remember. {{name}} suddenly recalls flashes of things that seem too vivid to be imagined:
+      </p>
+
+      <ul>
+        <li>climate denial (early 21st century)</li>
+        <li>the plots of "V for Vendetta," "I, Robot" and other such media</li>
+        <li>the colonial destruction of indigenous culture (20th and 21st century)</li>
+        <li>slavery through lithium mining in Congo (early 21st century)</li>
+        <li>the assassination of a pope in the 2030s</li>
+        <li>animals exploited for food and other human needs (across human history)</li>
+        <li>the AI-generated misinformation crisis of the 2050s</li>
+        <li>the covid-19 pandemic</li>
+        <li>the genocide of palestine (20th and 21st century)</li>
+        <li>a single word that used to mean everything</li>
+      </ul>
+
+      <p>
+        what else do you think they remembered?
+      </p>
+
+      <textarea id="erasedHistory" rows="4" placeholder="describe the erased memory here..."></textarea><br><br>
+
+      <button class="button" type="button" onclick="saveScene4()">Continue to Scene 5</button>
+    </form>
+
+    <hr>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("mainCharacterName") || "the main character";
+    const friend = localStorage.getItem("friendName") || "their friend";
+    document.body.innerHTML = document.body.innerHTML
+      .replaceAll("{{name}}", name)
+      .replaceAll("{{friend}}", friend);
+
+    function saveScene4() {
+      const personalMemory = document.getElementById("personalMemory").value.trim();
+      const erasedHistory = document.getElementById("erasedHistory").value.trim();
+
+      if (!personalMemory || !erasedHistory) {
+        alert("please answer both questions before continuing.");
+        return;
+      }
+
+      localStorage.setItem("scene4_personalMemory", personalMemory);
+      localStorage.setItem("scene4_erasedHistory", erasedHistory);
+
+      window.location.href = "scene5.html";
+    }
+  </script>
+
+  
+</body>
+</html>

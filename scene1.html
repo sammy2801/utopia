@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Scene 1: The Arrival</h2>
+
+    <p>
+      the year is 2070. blackening clouds envelop the dull sky. the sky is always dull, as if rain will fall any second. {{name}}’s transport vehicle screeches to a halt outside the history museum. a billboard at the entrance says “Preserved Memory Exhibition” and in parentheses underneath, “(invite-only).” {{name}} gets out and hands their car’s key to the valet. the building used to be a planetarium, and it’s long since been repurposed into a museum for things forgotten, a place one can come to remember.
+    </p>
+
+    <p>
+      they walk up to the entrance of the museum. a floating drone with some kind of facial recognition technology scans them. the doors swing open, beckoning them in. once they’re inside, they see an enormous high-ceilinged room, with large screens of varying sizes placed all over, playing what are meant to be scenes from history. it’s a museum of things, human implements and tools, things we created to live that are now obsolete — or have evolved into things that are unrecognisable from their origin, spanning everything from machine guns to bullock-carts.
+    </p>
+
+    <p>
+      {{name}} looks around, they spot a cylindrical canister floating in the centre of the room, but it’s too far away for them to read the inscription. it unsettles them. they decide to go closer. as they move towards it, a confusing smell appears. the smell gives rise to an eerie feeling in their chest. it’s familiar, although they’re sure they’ve never smelled anything like this before. the feeling in their chest also feels the same way.
+    </p>
+
+    <p>
+      and it isn’t just the cylindrical object, it’s the colours, the overall design and vibe of the space. Utopia (the AI) has made sure to create sophisticated solutions for healthcare, particularly after the AI boom. so feeling uncomfortable is an old feeling. {{name}} struggles to place it.
+    </p>
+
+    <p>
+      there’s a bunch of artifacts here on display. it’s almost common knowledge among the populace that Utopia picks and chooses, potentially censors, or even manufactures historical truth. post the AI boom of the 2020s, an important shift in social conscience was the erosion of trust in what could be seen, because humans were unsure what was natural and true.
+    </p>
+
+    <p>
+      in this technocracy, nobody questions Utopia for small things like preserving history, because the collective social conscience is already okay with Utopia doing stuff like taking military action.
+    </p>
+
+    <p>
+      it’s late evening, a few hours after the museum has closed for the day. this is an invite-only private event, people from various fields of society have been invited, and one of them is {{name}}. they look around. they see stills from wars that ended peacefully, non-violent protests with successful outcomes. soft music in the background, a jazzy classical sounding piece. {{name}} thinks of their father’s record player, that they still have in their possession, in the basement underneath their house. it’s been a few years since they’ve consciously listened to music. something reminds them to listen. something feels familiar, about listening — the thought of it, at least.
+    </p>
+
+    <p>
+      their mind is escaping from them, and {{name}} is convinced this has something to do with what they’re smelling.
+    </p>
+
+    <hr>
+
+    <form id="scene1-form">
+      <h3>Questions</h3>
+
+      <label for="vehicleInput">
+        what kind of vehicle do you think {{name}} owns?
+      </label><br>
+      <input type="text" id="vehicleInput" placeholder="e.g. hovercar, bike, spaceship"><br><br>
+
+      <label for="selfDrive">
+        do they drive their own vehicle?
+      </label><br>
+      <select id="selfDrive">
+        <option value="">-- Select --</option>
+        <option value="Yes">yes</option>
+        <option value="No">no</option>
+      </select><br><br>
+
+      <label for="valetHuman">
+        is the valet who takes their keys human?
+      </label><br>
+      <select id="valetHuman">
+        <option value="">-- Select --</option>
+        <option value="Yes">yes</option>
+        <option value="No">no</option>
+      </select><br><br>
+
+      <label for="emotion">
+        how does {{name}} feel entering the museum?
+      </label><br>
+      <select id="emotion">
+        <option value="">-- Select --</option>
+        <option value="curious">curious</option>
+        <option value="anxious">anxious</option>
+        <option value="numb">numb</option>
+        <option value="angry">angry</option>
+        <option value="awe">in awe</option>
+      </select><br><br>
+
+      <button class="button" type="button" onclick="saveScene1()">Continue to Scene 2</button>
+    </form>
+
+    <hr>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("mainCharacterName") || "the main character";
+    document.body.innerHTML = document.body.innerHTML.replaceAll("{{name}}", name);
+
+    function saveScene1() {
+      const vehicle = document.getElementById("vehicleInput").value.trim();
+      const selfDrive = document.getElementById("selfDrive").value;
+      const valetHuman = document.getElementById("valetHuman").value;
+      const emotion = document.getElementById("emotion").value;
+      
+
+      if (!vehicle || !selfDrive || !valetHuman || !emotion) {
+      alert("please answer all the questions before moving on.");
+      return;
+      }
+
+
+      localStorage.setItem("scene1_vehicle", vehicle);
+      localStorage.setItem("scene1_selfDrive", selfDrive);
+      localStorage.setItem("scene1_valetHuman", valetHuman);
+      localStorage.setItem("scene1_emotion", emotion);
+
+      window.location.href = "scene2.html";
+    }
+  </script>
+</body>
+</html>

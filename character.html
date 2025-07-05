@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choose Your Character</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Who will tell this story?</h1>
+
+    <label for="nameInput">Name your main character:</label><br>
+    <input type="text" id="nameInput" placeholder="Enter name..." /><br><br>
+
+    <label for="mainCharacter">Pick your character’s role:</label><br>
+    <select id="mainCharacter">
+      <option value="">-- Select --</option>
+      <option value="Programmer">Programmer</option>
+      <option value="Lab-grown Human">Lab-grown Human</option>
+      <option value="Drug Dealer">Drug Dealer</option>
+      <option value="Disgraced AI Ethicist">Disgraced AI Ethicist</option>
+      <option value="Underground storyteller">Underground Storyteller</option>
+      <option value="Uploaded consciousness">Machine with Uploaded Consciousness</option>
+    </select><br><br>
+
+    <button class="button" onclick="submitCharacter()">Submit</button>
+
+    <div id="confirmation" style="display:none; margin-top: 30px;">
+      <p>Got it! Your character has been logged.</p>
+      <p><a class="button" href="story.html">Begin the Story</a></p>
+    </div>
+  </div>
+
+  <script>
+    function submitCharacter() {
+      const name = document.getElementById("nameInput").value.trim();
+      const role = document.getElementById("mainCharacter").value;
+
+      if (!name || !role) {
+        alert("Please fill in both the name and character role.");
+        return;
+      }
+
+      localStorage.setItem("mainCharacterName", name);
+      localStorage.setItem("mainCharacterRole", role);
+
+      document.getElementById("confirmation").style.display = "block";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submitting your story...</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Submitting your story...</h2>
+    <p>please wait while your choices are saved. this may take a few seconds.</p>
+  </div>
+
+  <script>
+    const COLLECTION_ID = "686963538561e97a50320ff4";
+    const API_KEY = "$2a$10$xTD9Bx03apdopYPojGB6yuyM93mTQrYq4N9O6unEIyPtI/.9Ta.uS";
+
+    async function submitToCollection() {
+      // STEP 1: Gather localStorage
+      let data = {};
+      Object.keys(localStorage).forEach((key) => {
+        data[key] = localStorage.getItem(key);
+      });
+
+      // STEP 2: Submit via POST to your collection
+      try {
+        const response = await fetch("https://api.jsonbin.io/v3/b", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key": API_KEY,
+            "X-Collection-Id": COLLECTION_ID,
+            "X-Bin-Private": "false" // or "true" if you want private entries
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          localStorage.clear();
+          window.location.href = "thankyou.html";
+        } else {
+          const errText = await response.text();
+          console.error("Error from server:", errText);
+          alert("submission failed. try again.");
+        }
+      } catch (err) {
+        console.error("Network error:", err);
+        alert("something went wrong. try again.");
+      }
+    }
+
+    window.onload = submitToCollection;
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Scene 3: The Canteen</h2>
+
+    <p>
+      there’s a quiet urgency, compounded by the general discomfort. a number of people are at the canteen, some of them {{name}} recognises.
+    </p>
+
+    <div id="characterDescriptions"></div>
+
+    <p>
+      they look back to the entrance and see {{friend}}. {{name}} waves at them. {{friend}} smiles back, and makes their way to {{name}}. if they are affected by the space the way {{name}} was, their body language doesn’t show it. the light slowly starts to dim. {{friend}} is right on time. the event is about to begin. a spotlight shines on the canister. {{name}} makes their way from the canteen to the centre of the room, along with everyone else.
+    </p>
+
+    <hr>
+
+    <form id="scene3-form">
+      <h3>Questions</h3>
+
+      <label for="mostDangerous">
+        who do you think is most dangerous in this room?
+      </label><br>
+      <select id="mostDangerous">
+        <option value="">-- Select --</option>
+        <option value="Programmer">programmer</option>
+        <option value="Lab-grown human">lab-grown human</option>
+        <option value="Drug dealer">drug dealer</option>
+        <option value="Disgraced AI Ethicist">disgraced AI ethicist</option>
+        <option value="Underground storyteller">underground storyteller</option>
+        <option value="Uploaded consciousness">uploaded consciousness</option>
+      </select><br><br>
+
+      <label for="reportToAI">
+        would you report suspicious behaviour to Utopia?
+      </label><br>
+      <select id="reportToAI">
+        <option value="">-- Select --</option>
+        <option value="Yes">yes</option>
+        <option value="No">no</option>
+        <option value="Depends">depends</option>
+      </select><br><br>
+
+      <label for="trustedCharacter">
+        which character do you think {{name}} trusts the most?
+      </label><br>
+      <input type="text" id="trustedCharacter" placeholder="apart from the friend they're meeting (could be nobody)"><br><br>
+
+      <button class="button" type="button" onclick="saveScene3()">Continue to Scene 4</button>
+    </form>
+
+    <hr>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("mainCharacterName") || "the main character";
+    const friend = localStorage.getItem("friendName") || "their friend";
+    const mainRole = localStorage.getItem("mainCharacterRole") || "";
+    const friendRole = localStorage.getItem("scene2_friendRole") || "";
+
+    // Replace template tags
+    document.body.innerHTML = document.body.innerHTML
+      .replaceAll("{{name}}", name)
+      .replaceAll("{{friend}}", friend);
+
+    // Character description pool
+    const characterDescriptions = {
+      "Programmer": "the computer programmer, who worked for the AI — son of the ethicist, who had fought for years against the AI.",
+      "Disgraced AI Ethicist": "the disgraced AI ethicist himself, who nobody had seen or heard from for the past ten years, and had recently returned to be in public light.",
+      "Underground storyteller": "the underground storyteller, recently out on bail, infamous for having circulated forbidden narratives to the general public.",
+      "Drug dealer": "they see their drug dealer. they’re thrown off for a second. what’s he doing here? he’s in some kind of conversation with someone, they stand there sipping wine.",
+      "Uploaded consciousness": "a tall android, probably someone from the Neutopia Experiment — humans who had successfully had their consciousness and neurological data uploaded to machines, essentially allowing them to live forever. the android moves around on two wheels, skirting forward and back, the noise from their movement like a soft whir.",
+      "Lab-grown human": "a human wearing a jacket with the blue Utopia insignia on it, which meant they were lab-grown."
+    };
+
+    // Inject filtered character descriptions
+    let characterHTML = "";
+    for (let [role, text] of Object.entries(characterDescriptions)) {
+      if (role !== mainRole && role !== friendRole) {
+        characterHTML += `<p>${text}</p>`;
+      }
+    }
+    document.getElementById("characterDescriptions").innerHTML = characterHTML;
+
+    // Save answers
+    function saveScene3() {
+      const mostDangerous = document.getElementById("mostDangerous").value;
+      const reportToAI = document.getElementById("reportToAI").value;
+      const trustedCharacter = document.getElementById("trustedCharacter").value.trim();
+
+      if (!mostDangerous || !reportToAI || !trustedCharacter) {
+        alert("please answer all the questions before continuing.");
+        return;
+      }
+
+      localStorage.setItem("scene3_mostDangerous", mostDangerous);
+      localStorage.setItem("scene3_reportToAI", reportToAI);
+      localStorage.setItem("scene3_trustedCharacter", trustedCharacter);
+
+      window.location.href = "scene4.html";
+    }
+  </script>
+</body>
+</html>

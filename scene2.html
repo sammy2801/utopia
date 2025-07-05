@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Scene 2: The Canister</h2>
+
+    <div id="writingScene"></div>
+
+    <p>
+      they look back up, and continue to walk in the direction of the canister. they pass an instalment of the “iPad Pro” — a weird, flat, tablet-like device, which was supposed to perform the functions of the tiny projector {{name}} carries with them. it also had something called an “Apple Pencil” that was seemingly used to write on the tablet device with.
+    </p>
+
+    <p>
+      they take their projector device out. in this world, it’s called a Poke. they tap the fag-end of the Poke, and it projects a flat holographic screen up. there’s a text from their friend, the person they were supposed to meet at the event. they’ve said they’re almost there.
+    </p>
+
+    <p>
+      they say okay, and move back to where they were. they walk past displays of a shoelace, a ticket stub from a movie theatre, and similar other objects until they finally arrive at the canister. the unsettling feeling returns again, almost as if a slap to their face. they hold the Poke up to their lips and take a deep drag. a warm, calm flows into them. but the unsettling feeling continues, persists through the drug.
+    </p>
+
+    <p>
+      the sign on the canister reads, “Fractured Memory #1.” they read the sign but struggle to focus. from what they can tell, it’s a piece of history that was used to control people’s minds, bring them into subjugation. they conclude that this is why it might be so unsettling. the programme will start soon, and they assume all will be explained soon. they move away, heading towards the canteen.
+    </p>
+
+    <hr>
+
+    <form id="scene2-form">
+      <h3>Questions</h3>
+
+      <label for="pokeDrug">
+        what drug do you think was in the Poke?
+      </label><br>
+      <input type="text" id="pokeDrug" placeholder="e.g. nicotine, marijuana, something else entirely"><br><br>
+
+      <label for="censorship">
+        do you think Utopia is censoring history?
+      </label><br>
+      <select id="censorship">
+        <option value="">-- Select --</option>
+        <option value="Yes">yes</option>
+        <option value="No">no</option>
+        <option value="Maybe">maybe</option>
+      </select><br><br>
+
+      <label for="preservedItem">
+        if you had to preserve one item from the past in this museum, what would it be?
+      </label><br>
+      <input type="text" id="preservedItem" placeholder="e.g. a book, an object"><br><br>
+
+      <label for="ipadBelievability">
+        is it too far-fetched to assume that people have forgotten about products like the iPad?
+      </label><br>
+      <select id="ipadBelievability">
+        <option value="">-- Select --</option>
+        <option value="Yes">yes</option>
+        <option value="No">no</option>
+        <option value="Not sure">not sure</option>
+      </select><br><br>
+
+      <p>are there any additional character details you'd like to include for {{name}}?</p>
+      <textarea id="characterDetails" rows="5" placeholder="fill in here..."></textarea><br><br>
+
+      <label for="friendRole">
+        who do you think their friend is?
+      </label><br>
+      <select id="friendRole">
+        <option value="">-- Select --</option>
+        <option value="Programmer">programmer</option>
+        <option value="Lab-grown human">lab-grown human</option>
+        <option value="Drug dealer">drug dealer</option>
+        <option value="Disgraced AI Ethicist">disgraced AI ethicist</option>
+        <option value="Underground storyteller">underground storyteller</option>
+        <option value="Uploaded consciousness">uploaded consciousness</option>
+      </select><br><br>
+
+      <label for="friendName">
+        name their friend:
+      </label><br>
+      <input type="text" id="friendName" placeholder="Enter friend’s name"><br><br>
+
+      <button class="button" type="button" onclick="saveScene2()">Continue to Scene 3</button>
+    </form>
+
+    <hr>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("mainCharacterName") || "the main character";
+    const friend = localStorage.getItem("friendName") || "their friend";
+    const mainRole = localStorage.getItem("mainCharacterRole") || "";
+
+    // Replace all {{name}} and {{friend}} in body text
+    document.body.innerHTML = document.body.innerHTML
+      .replaceAll("{{name}}", name)
+      .replaceAll("{{friend}}", friend);
+
+    // Conditional writing tool paragraph
+    const machineTypes = ["Uploaded consciousness", "Lab-grown human"];
+    const writingDiv = document.getElementById("writingScene");
+
+    const fountainPenPara = `
+      <p>from the inside pocket of their jacket, ${name} removes an old fountain pen and a pad of paper. they'd found them in their old family basement, bottles of ink preserved in airtight containers. they take it out, hold it against the palm of their hand, and scribble something. fountain pens were a relic from the past, from long before ${name} was born. this past week, they'd been obsessed with them. they write about what they're feeling. it is calming, this act of writing, and for a moment they feel better.</p>
+    `;
+
+    const analogRecorderPara = `
+      <p>from an inside pocket, ${name} removes an old analog recorder they’d found in a scrapyard while running an errand for Utopia. they hold it against themselves and transmit data. these devices were a relic from the past, long before ${name} could remember. this past week, they’d been obsessed with them. they record what they’re feeling. it is calming, this act of analog recording, and for a moment they feel better.</p>
+    `;
+
+    writingDiv.innerHTML = machineTypes.includes(mainRole) ? analogRecorderPara : fountainPenPara;
+
+    function saveScene2() {
+      const pokeDrug = document.getElementById("pokeDrug").value.trim();
+      const censorship = document.getElementById("censorship").value;
+      const preservedItem = document.getElementById("preservedItem").value.trim();
+      const ipadBelievability = document.getElementById("ipadBelievability").value;
+      const characterDetails = document.getElementById("characterDetails").value;
+      const friendRole = document.getElementById("friendRole").value;
+      const friendName = document.getElementById("friendName").value.trim();
+
+      if (!pokeDrug || !censorship || !preservedItem || !ipadBelievability || !characterDetails || !friendRole || !friendName) {
+        alert("please answer all the questions before continuing.");
+        return;
+      }
+
+      localStorage.setItem("scene2_pokeDrug", pokeDrug);
+      localStorage.setItem("scene2_censorship", censorship);
+      localStorage.setItem("scene2_preservedItem", preservedItem);
+      localStorage.setItem("scene2_ipadBelievability", ipadBelievability);
+      localStorage.setItem("scene2_characterDetails", characterDetails);
+      localStorage.setItem("scene2_friendRole", friendRole);
+      localStorage.setItem("friendName", friendName);
+
+      window.location.href = "scene3.html";
+    }
+  </script>
+</body>
+</html>

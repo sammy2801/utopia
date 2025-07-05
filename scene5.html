@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scene 5</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Scene 5: What Happens Next?</h2>
+
+    <p>
+      the room is still hazy with smoke and memory. {{name}} stands slowly. people are murmuring. the canister lies shattered, but the memory doesn’t seem to have escaped. or maybe it has. no one can tell. {{name}} looks around for {{friend}} — and then back at the others. decisions need to be made.
+    </p>
+
+    <p>
+      this is your story now. describe what happens next.
+    </p>
+
+    <textarea id="finalChoice" rows="10" placeholder="What does {{name}} do? Do they record the memory? Who helps them? Is the AI deceived? What happens to the canister?"></textarea><br><br>
+
+    <p>
+      {{name}} leaves the museum with the unsettling feeling slowly abating. something has changed, they just can’t place what. as they wait for their valet, the moonlight looks beautiful. they remove their pen and paper to write a haiku. they see the list. their eyes widen.
+    </p>
+
+    <button class="button" onclick="saveScene5()">The End →</button>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("mainCharacterName") || "the main character";
+    const friend = localStorage.getItem("friendName") || "their friend";
+
+    // Replace tags
+    document.body.innerHTML = document.body.innerHTML
+      .replaceAll("{{name}}", name)
+      .replaceAll("{{friend}}", friend);
+
+    function saveScene5() {
+      const finalChoice = document.getElementById("finalChoice").value.trim();
+
+      if (!finalChoice) {
+        alert("please describe what happens next before continuing.");
+        return;
+      }
+
+      localStorage.setItem("scene5_finalChoice", finalChoice);
+      window.location.href = "summary.html";
+    }
+  </script>
+</body>
+</html>
