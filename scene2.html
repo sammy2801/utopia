@@ -32,14 +32,10 @@
     <form id="scene2-form">
       <h3>Questions</h3>
 
-      <label for="pokeDrug">
-        what drug do you think was in the Poke?
-      </label><br>
+      <label for="pokeDrug">what drug do you think was in the Poke?</label><br>
       <input type="text" id="pokeDrug" placeholder="e.g. nicotine, marijuana, something else entirely"><br><br>
 
-      <label for="censorship">
-        do you think Utopia is censoring history?
-      </label><br>
+      <label for="censorship">do you think Utopia is censoring history?</label><br>
       <select id="censorship">
         <option value="">-- Select --</option>
         <option value="Yes">yes</option>
@@ -47,14 +43,10 @@
         <option value="Maybe">maybe</option>
       </select><br><br>
 
-      <label for="preservedItem">
-        if you had to preserve one item from the past in this museum, what would it be?
-      </label><br>
+      <label for="preservedItem">if you had to preserve one item from the past in this museum, what would it be?</label><br>
       <input type="text" id="preservedItem" placeholder="e.g. a book, an object"><br><br>
 
-      <label for="ipadBelievability">
-        is it too far-fetched to assume that people have forgotten about products like the iPad?
-      </label><br>
+      <label for="ipadBelievability">is it too far-fetched to assume that people have forgotten about products like the iPad?</label><br>
       <select id="ipadBelievability">
         <option value="">-- Select --</option>
         <option value="Yes">yes</option>
@@ -65,9 +57,7 @@
       <p>are there any additional character details you'd like to include for {{name}}?</p>
       <textarea id="characterDetails" rows="5" placeholder="fill in here..."></textarea><br><br>
 
-      <label for="friendRole">
-        who do you think their friend is?
-      </label><br>
+      <label for="friendRole">who do you think their friend is?</label><br>
       <select id="friendRole">
         <option value="">-- Select --</option>
         <option value="Programmer">programmer</option>
@@ -78,9 +68,7 @@
         <option value="Uploaded consciousness">uploaded consciousness</option>
       </select><br><br>
 
-      <label for="friendName">
-        name their friend:
-      </label><br>
+      <label for="friendName">name their friend:</label><br>
       <input type="text" id="friendName" placeholder="Enter friend’s name"><br><br>
 
       <button class="button" type="button" onclick="saveScene2()">Continue to Scene 3</button>
@@ -92,14 +80,14 @@
   <script>
     const name = localStorage.getItem("mainCharacterName") || "the main character";
     const friend = localStorage.getItem("friendName") || "their friend";
-    const mainRole = localStorage.getItem("mainCharacterRole") || "";
+    const mainRole = (localStorage.getItem("mainCharacterRole") || "").trim();
 
-    // Replace all {{name}} and {{friend}} in body text
+    // Replace all {{name}} and {{friend}} in the page
     document.body.innerHTML = document.body.innerHTML
       .replaceAll("{{name}}", name)
       .replaceAll("{{friend}}", friend);
 
-    // Conditional writing tool paragraph
+    // Dynamic paragraph switch
     const machineTypes = ["Uploaded consciousness", "Lab-grown Human"];
     const writingDiv = document.getElementById("writingScene");
 
@@ -111,7 +99,9 @@
       <p>from an inside pocket, ${name} removes an old analog recorder they’d found in a scrapyard while running an errand for Utopia. they hold it against themselves and transmit data. these devices were a relic from the past, long before ${name} could remember. this past week, they’d been obsessed with them. they record what they’re feeling. it is calming, this act of analog recording, and for a moment they feel better.</p>
     `;
 
-    writingDiv.innerHTML = machineTypes.includes(mainRole) ? analogRecorderPara : fountainPenPara;
+    writingDiv.innerHTML = machineTypes.includes(mainRole)
+      ? analogRecorderPara
+      : fountainPenPara;
 
     function saveScene2() {
       const pokeDrug = document.getElementById("pokeDrug").value.trim();
